@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "iostream": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "vector": "cpp",
+        "valarray": "cpp",
+        "forward_list": "cpp",
+        "string": "cpp"
+    }
+}

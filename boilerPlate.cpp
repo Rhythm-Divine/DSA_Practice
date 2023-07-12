@@ -14,7 +14,7 @@ typedef long long int lli;
 #define debugmp(v)                                  \
     for (auto i : v)                                \
     {                                               \
-        cout << i.first << " " << i.second << newl; \
+        cout << i.first << "-->" << i.second << newl; \
     }
 #define all(a) a.begin(), a.end()
 #define mod 1000000007

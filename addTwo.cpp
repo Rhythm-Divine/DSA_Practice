@@ -28,14 +28,25 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
       sum += l2->val;
       l2 = l2->next;
     }
-    sum+=carry;
+    sum += carry;
     digit = sum % 10;
     carry = sum / 10;
-   
+
     head->next = new ListNode(digit);
     head = head->next;
   }
   return temp->next;
+}
+
+void deallocateList(ListNode *head)
+{
+  ListNode *current = head;
+  while (current != nullptr)
+  {
+    ListNode *nextNode = current->next;
+    delete current;
+    current = nextNode;
+  }
 }
 int main()
 {
@@ -75,4 +86,12 @@ int main()
     cout << temp->val << "->";
     temp = temp->next;
   }
+
+  // Deallocate memory for l1
+  deallocateList(l1);
+
+  // Deallocate memory for l2
+  deallocateList(l2);
+
+  deallocateList(temp);
 }

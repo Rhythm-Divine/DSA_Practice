@@ -1,19 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(int i, unordered_map<int, vector<pair<int, int>>> &m, vector<int> &vis, stack<int> &st)
-{
-    vis[i] = 1;
 
-    for (auto node : m[i])
-    {
-        if (vis[node.first] == 0)
-        {
-            dfs(node.first, m, vis, st);
-        }
-    }
-    st.push(i);
-}
 vector<int> shortestPath(int N, int M, vector<vector<int>> &edges)
 {
     unordered_map<int, vector<pair<int, int>>> m;
@@ -24,37 +12,25 @@ vector<int> shortestPath(int N, int M, vector<vector<int>> &edges)
         m[i[0]].push_back({i[1], i[2]});
     }
 
-    vector<int> vis(N, 0);
-    stack<int> st;
-    for (int i = 0; i < N; i++)
-    {
-        if (vis[i] == 0)
-        {
-            dfs(i, m, vis, st);
-        }
-    }
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+    pq.push({0,0});
 
-    while (!st.empty())
-    {
-        int i = st.top();
-        st.pop();
-
-        for (auto node : m[i])
-        {
-            if (dist[i] + node.second < dist[node.first])
-            {
-                dist[node.first] = dist[i] + node.second;
+    while(!pq.empty()){
+        int node=pq.top().second;
+        int wt=pq.top().first;
+        pq.pop();
+        
+        for(auto i:m[node]){
+            int adjNode=i.first;
+            int adjWt=i.second;
+            if(dist[node]+adjWt<dist[adjNode]){
+                dist[adjNode]=dist[node]+adjWt;
+                pq.push({dist[adjNode],adjNode});
             }
         }
     }
-    for (int i = 0; i < dist.size(); i++)
-    {
-        if (dist[i] == INT_MAX)
-        {
-            dist[i] = -1;
-        }
-    }
     return dist;
+
 }
 int main()
 {
